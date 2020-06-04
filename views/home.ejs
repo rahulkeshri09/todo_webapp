@@ -3,10 +3,59 @@
         <title>
             todo_app
         </title>
+        <link rel="stylesheet" href="./css/home.css" type="text/css">
     </head>
     <body>
-        <h1>
-            This is Home Page
-        </h1>
+        <div id="todo_container">         <!-- contains all body of application -->
+            <h1 id="header">
+                Tasks
+            </h1> 
+            <div id="assign_task">          <!-- assign task container   -->
+                <form action="/add-task" method="POST">
+                    <div>
+                        <label>DESCRIPTION</label>
+                        <input type="text" name="description" required>
+                    </div>
+                         <div id="sided">
+                        <div>  
+                            <label>LAST DATE</label>
+                            <input type="date" name="date" required>
+                       </div>
+                        <div>  
+                            <label for="c1">CATEGORY</label>
+                            <select id="#c1" name="category">
+                                <option value="home">Home</option>
+                                <option value="personal">Personal</option>
+                                <option value="office">Office</option>
+                                <option value="friends">Friends</option>
+                            </select>
+                        </div>  
+                    </div>   
+                        <button id="add" type="submit">
+                            Add Task                       
+                        </button>
+                </form>
+            </div>
+            <hr>
+            <div id="show_task">         <!-----showing the pending tasks ----->
+                <% for(let i of task_list){ %>         <!--- fetchin pending task by database -->
+                    <div id="task_name">
+                        <div>
+                        <span>
+                            <h3><%=i.description %></h3>
+                            <p><%=i.date %></p>
+                        </span>
+                        </div>
+                        <div>
+                        <div id="tag"><%=i.category %></div>
+                        <a href="delete-task/?id=<%=i._id%>">
+                            <div id="delete">DELETE</div>
+                        </a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <script src="./js/home.js" ></script>
+        </div>
     </body>
 </html>
